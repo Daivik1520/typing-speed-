@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Typing Speed Test</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="brand">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 6h16v2H4V6zm0 5h10v2H4v-2zm0 5h16v2H4v-2z" fill="currentColor"/>
+        </svg>
+        <h1>Typing Speed Test</h1>
+        <span id="brand-badge" class="brand-badge" aria-label="Brand">by SAM</span>
+      </div>
+      <div class="header-actions">
+        <button id="theme-toggle" class="btn ghost" aria-label="Toggle theme">🌙</button>
+      </div>
+    </header>
+    <section class="hero" aria-label="Intro">
+      <h2 class="gradient-text">Find your flow. Type with rhythm.</h2>
+      <p id="motivation-text" class="motivation">Accuracy over speed — the speed will come.</p>
+      <p id="brand-sub" class="brand-sub">SAM — Precision & Flow</p>
+    </section>
+
+    <main class="app-main">
+      <section class="controls">
+        <div class="control-group">
+          <label for="mode-select">Mode</label>
+          <select id="mode-select" aria-label="Select test mode">
+            <option value="time" selected>Time</option>
+            <option value="words">Words</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label for="content-select">Content</label>
+          <select id="content-select" aria-label="Select content type">
+            <option value="words" selected>Random words</option>
+            <option value="quotes">Quotes</option>
+            <option value="numbers">Numbers & Symbols</option>
+            <option value="code">Code snippet</option>
+            <option value="custom">Custom text</option>
+          </select>
+        </div>
+        <div class="control-group" data-for="time">
+          <label for="duration-select">Duration</label>
+          <select id="duration-select" aria-label="Select test duration">
+            <option value="15">15s</option>
+            <option value="30">30s</option>
+            <option value="60" selected>60s</option>
+            <option value="120">120s</option>
+          </select>
+        </div>
+        <div class="control-group" data-for="words" hidden>
+          <label for="wordcount-select">Word count</label>
+          <select id="wordcount-select" aria-label="Select word count">
+            <option value="25">25</option>
+            <option value="50" selected>50</option>
+            <option value="100">100</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label for="difficulty-select">Difficulty</label>
+          <select id="difficulty-select" aria-label="Select difficulty">
+            <option value="easy">Easy</option>
+            <option value="normal" selected>Normal</option>
+            <option value="hard">Hard</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label for="punctuation-toggle">Include punctuation</label>
+          <input type="checkbox" id="punctuation-toggle" checked aria-label="Include punctuation in text" />
+        </div>
+        <div class="control-group">
+          <label for="precision-toggle">Precision mode (no backspace)</label>
+          <input type="checkbox" id="precision-toggle" aria-label="Disable backspace during test" />
+        </div>
+        <div class="control-group">
+          <label for="error-sound-toggle">Error sound</label>
+          <input type="checkbox" id="error-sound-toggle" aria-label="Play sound on errors" />
+        </div>
+        <div class="control-group">
+          <button id="start-btn" class="btn primary">Start</button>
+          <button id="pause-btn" class="btn" disabled>Pause</button>
+          <button id="reset-btn" class="btn" disabled>Reset</button>
+        </div>
+        <div class="control-group full-width" data-for-content="custom" hidden>
+          <label for="custom-text">Custom text</label>
+          <textarea id="custom-text" rows="3" placeholder="Paste or type your custom text here..." aria-label="Custom text"></textarea>
+        </div>
+      </section>
+
+      <section class="test-area" aria-label="Typing test area">
+        <div class="stats">
+          <div class="stat"><span class="label">WPM</span><span id="wpm" class="value">0</span></div>
+          <div class="stat"><span class="label">Raw</span><span id="raw-wpm" class="value">0</span></div>
+          <div class="stat"><span class="label">Accuracy</span><span id="accuracy" class="value">100%</span></div>
+          <div class="stat"><span class="label" id="progress-label">Time</span><span id="progress-value" class="value">60s</span></div>
+          <div class="stat"><span class="label">Errors</span><span id="errors" class="value">0</span></div>
+        </div>
+
+        <div class="progress-bar" aria-hidden="true">
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+
+        <div id="text-container" class="text-container" role="group" aria-label="Text to type"></div>
+
+        <input id="typing-input" class="typing-input" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" aria-label="Typing input" />
+        <p id="hint" class="hint">Click Start, then type. Click the text to refocus if needed.</p>
+      </section>
+
+      <section class="leaderboard" aria-label="Leaderboard">
+        <div class="leaderboard-header">
+          <h2>Leaderboard (Local)</h2>
+          <div>
+            <button id="clear-leaderboard" class="btn ghost">Clear</button>
+          </div>
+        </div>
+        <ol id="leaderboard-list" class="leaderboard-list"></ol>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>Built for speed and accuracy • Modular design • Works offline</p>
+    </footer>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+  </html>
